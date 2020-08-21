@@ -16,3 +16,10 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+/**
+ * rebbitmq
+ */
+Route::get('/rabbitmq/producer', function () {
+    echo 1;
+});
