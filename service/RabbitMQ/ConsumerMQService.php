@@ -32,6 +32,7 @@ class ConsumerMQService extends BaseMQService
     {
         //创建交换机
         $ex = $this->exchange();
+		dd($ex);
         $ex->setType(AMQP_EX_TYPE_DIRECT); //direct类型
         $ex->setFlags(AMQP_DURABLE); //持久化
         //echo "Exchange Status:".$ex->declare()."\n";

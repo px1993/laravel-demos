@@ -39,6 +39,6 @@ class RabbitMQProducer extends Command
     public function handle()
     {
         $producer = new ProducerMQService();
-        $producer->run();
-    }
+		$producer->run();
+	}
 }

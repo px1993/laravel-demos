@@ -117,7 +117,7 @@ abstract class BaseMQService
     {
         if(!$this->AMQPExchange) {
             $this->AMQPExchange = new \AMQPExchange($this->channel());
-            // $this->AMQPExchange->setName($this->exchange);
+            $this->AMQPExchange->setName($this->exchange);
         }
         return $this->AMQPExchange;
     }

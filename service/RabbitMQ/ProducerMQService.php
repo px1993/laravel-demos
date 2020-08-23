@@ -37,22 +37,25 @@ class ProducerMQService extends BaseMQService
      */
     public function run()
     {
-        $sendEd  = true ;
         $channel = $this->channel(); //频道
         $ex      = $this->exchange();  //创建交换机对象
-        $message = 'product message '.rand(1,99999); //消息内容
-        //开始事务
-        $channel->startTransaction();
-            foreach ($this->routes as $route) {
-                $sendEd = $ex->publish($message, $route) ;
-                echo "Send Message:".$sendEd."\n";
-            }
-            if(!$sendEd) {
-                $channel->rollbackTransaction();
-            }
-        $channel->commitTransaction();
-        //提交事务
+        while(true){
+			$message = 'product message '.rand(1,99999); //消息内容
+			//开始事务
+    	    $channel->startTransaction();
+        	$sendEd  = true;
+    	        foreach ($this->routes as $route) {
+    	            $sendEd = $ex->publish($message, $route) ;
+					echo "Send Message:".$sendEd."\n";
+    	        }
+    	        if(!$sendEd) {
+    	            $channel->rollbackTransaction();
+    	        }
+    	    $channel->commitTransaction();
+    	    //提交事务
+			sleep(1);
+		}
         $this->close();
-        die ;
+        die;
     }
 }
